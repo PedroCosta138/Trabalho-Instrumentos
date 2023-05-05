@@ -13,8 +13,10 @@ class BdInstrumentosOpenHelper (
 
 
 
-    override fun onCreate(p0: SQLiteDatabase?) {
-
+    override fun onCreate(db: SQLiteDatabase?) {
+        requireNotNull(db)
+    TabelaBrands(db!!).cria()
+    TabelaInstrumentos(db!!).cria()
 
     }
 
