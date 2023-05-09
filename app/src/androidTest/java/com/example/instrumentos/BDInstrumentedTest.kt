@@ -14,11 +14,17 @@ import org.junit.Assert.*
  * See [testing documentation](http://d.android.com/tools/testing).
  */
 @RunWith(AndroidJUnit4::class)
-class ExampleInstrumentedTest {
+class BDInstrumentedTest {
+
+    private fun getAppContext() = InstrumentationRegistry.getInstrumentation().targetContext
+
     @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.example.instrumentos", appContext.packageName)
+    fun consequeAbrirBD() {
+
+        val openHelper = BdInstrumentosOpenHelper(getAppContext())
+        val db = openHelper.readableDatabase
+        assert(db.isOpen)
+
     }
+
 }
