@@ -13,5 +13,9 @@ class TabelaBrands(db: SQLiteDatabase) : TabelaBD(db, NOME_TABELA) {
         const val CAMPO_NOME = "nome"
         const val CAMPO_PAISPRODUCAO = "paisProducao"
         const val CAMPO_ANOFUNDADA = "anoFundada"
+
+        val CAMPOS = arrayOf(BaseColumns._ID, CAMPO_NOME, CAMPO_PAISPRODUCAO, CAMPO_ANOFUNDADA)
+
+
     }
 }

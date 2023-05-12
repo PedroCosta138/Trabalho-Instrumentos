@@ -1,6 +1,8 @@
 package com.example.instrumentos
 
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.provider.BaseColumns
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
 
@@ -72,5 +74,38 @@ class BDInstrumentedTest {
         insereInstrumentos(db, instrumento2)
     }
 
+    @Test
+    fun consegueLerBrands(){
+        val db = getWritableDatabase()
+
+        val brand1 = Brand("Fender", "Portugal", 1985)
+        insereBrand(db,brand1)
+
+        val brand2 = Brand("Cremona", "Itália", 1995)
+        insereBrand(db,brand2)
+
+        val tabelaBrands = TabelaBrands(db)
+        val cursor = tabelaBrands.consulta(
+            TabelaBrands.CAMPOS,
+            "${BaseColumns._ID}=?",
+            arrayOf(brand1.id.toString()),
+            null,
+            null,
+            null
+            )
+        assert(cursor.moveToNext())
+
+        val brandBD = Brand.fromCursor(cursor)
+        assertEquals(brand1,brandBD)
+
+        val cursorTodasBrands=tabelaBrands.consulta(
+            TabelaBrands.CAMPOS,
+            null,null,null,null,
+            TabelaBrands.CAMPO_NOME,
+            
+        )
+
+        assert(cursorTodasBrands.count>1)
+    }
 
 }
