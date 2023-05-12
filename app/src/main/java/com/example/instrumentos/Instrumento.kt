@@ -6,7 +6,7 @@ data class Instrumento(
     var nome:String,
     var tipo:String,
     var paisOrigem:String,
-    var idBrands:Int,
+    var idBrands:Long,
     var id:Long = -1) {
 
     fun toContentValues(): ContentValues {
