@@ -36,9 +36,11 @@ class BDInstrumentedTest {
     fun consegueInserirBrands(){
         val openHelper = BdInstrumentosOpenHelper(getAppContext())
         val db = openHelper.writableDatabase
-        
+
         val brand = Brand("Fender","Portugal",1985)
+        val id= TabelaBrands(db).insere((brand.toContentValues()))
         TabelaBrands(db).insere(brand.toContentValues())
+        assertNotEquals(-1,id)
     }
 
 }
