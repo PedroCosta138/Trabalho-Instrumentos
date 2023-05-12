@@ -26,11 +26,19 @@ class BDInstrumentedTest {
 
     @Test
     fun consequeAbrirBD() {
-
         val openHelper = BdInstrumentosOpenHelper(getAppContext())
         val db = openHelper.readableDatabase
         assert(db.isOpen)
 
+    }
+
+    @Test
+    fun consegueInserirBrands(){
+        val openHelper = BdInstrumentosOpenHelper(getAppContext())
+        val db = openHelper.writableDatabase
+        
+        val brand = Brand("Fender","Portugal",1985)
+        TabelaBrands(db).insere(brand.toContentValues())
     }
 
 }
