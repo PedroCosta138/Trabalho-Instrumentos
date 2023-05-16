@@ -102,10 +102,50 @@ class BDInstrumentedTest {
             TabelaBrands.CAMPOS,
             null,null,null,null,
             TabelaBrands.CAMPO_NOME,
-            
+
         )
 
         assert(cursorTodasBrands.count>1)
+    }
+
+    @Test
+
+    fun consegueLerInstrumentos(){
+
+        val db = getWritableDatabase()
+        val brand = Brand("Fender", "Portugal", 1985)
+        insereBrand(db, brand)
+
+        val instrumento1 = Instrumento("Guitarra","Cordas","Portugal",brand.id)
+        insereInstrumentos(db, instrumento1)
+
+        val instrumento2 = Instrumento("Baixo","Cordas","Estados Unidos da América",brand.id)
+        insereInstrumentos(db, instrumento2)
+
+        val tabelaInstrumentos = TabelaInstrumentos(db)
+        val cursor = tabelaInstrumentos.consulta(
+            TabelaInstrumentos.CAMPOS,
+            "${BaseColumns._ID}=?",
+            arrayOf(instrumento1.id.toString()),
+            null,
+            null,
+            null
+        )
+        assert(cursor.moveToNext())
+
+        val InstrumentoBD = Instrumento.fromCursor(cursor)
+        assertEquals(instrumento1,InstrumentoBD)
+
+        val cursorTodosInstrumentos=tabelaInstrumentos.consulta(
+            TabelaInstrumentos.CAMPOS,
+            null,null,null,null,
+            TabelaInstrumentos.CAMPO_NOME,
+
+            )
+
+        assert(cursorTodosInstrumentos.count>1)
+
+
     }
 
 }

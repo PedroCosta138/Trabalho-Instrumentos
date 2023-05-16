@@ -17,6 +17,13 @@ class TabelaInstrumentos(db: SQLiteDatabase):TabelaBD(db, NOME_TABELA) {
         const val CAMPO_TIPO= "tipo"
         const val CAMPO_PAISORIGEM = "paisOrigem"
         const val CAMPO_FK_BRAND ="id_brand"
+
+        val CAMPOS = arrayOf(BaseColumns._ID,
+            TabelaInstrumentos.CAMPO_NOME,
+            TabelaInstrumentos.CAMPO_TIPO,
+            TabelaInstrumentos.CAMPO_PAISORIGEM,
+            TabelaInstrumentos.CAMPO_FK_BRAND
+        )
     }
 
 
