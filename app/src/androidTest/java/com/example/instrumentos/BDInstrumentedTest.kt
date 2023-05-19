@@ -148,4 +148,81 @@ class BDInstrumentedTest {
 
     }
 
+    @Test
+        fun consegueAlterarBrand(){
+
+            val db = getWritableDatabase()
+
+        val brand = Brand("Yamaha", "...", 1985)
+        insereBrand(db, brand)
+
+        brand.paisProducao="Japão"
+        val registosAlterados = TabelaBrands(db).altera(brand.toContentValues(),"${BaseColumns._ID}=?",
+            arrayOf(brand.id.toString())
+        )
+
+        assertEquals(1,registosAlterados)
+        }
+
+    @Test
+    fun consegueAlterarInstrumento(){
+
+        val db = getWritableDatabase()
+
+        val brand1 = Brand("Yamaha", "Japão", 1985)
+        insereBrand(db,brand1)
+
+        val brand2 = Brand("Roland", "UK", 1932)
+        insereBrand(db,brand2)
+
+        val instrumento = Instrumento("Piano","Cordas","...",brand2.id)
+        insereInstrumentos(db, instrumento)
+
+        instrumento.idBrands=brand1.id
+        instrumento.paisOrigem = "Itália"
+
+        val registosAlterados = TabelaInstrumentos(db).altera(instrumento.toContentValues(),"${BaseColumns._ID}=?",
+            arrayOf(instrumento.id.toString())
+        )
+
+        assertEquals(1,registosAlterados)
+    }
+
+    @Test
+    fun consegueDeletarBrands() {
+
+        val db = getWritableDatabase()
+
+        val brand = Brand("Yamaha", "...", 1985)
+        insereBrand(db, brand)
+
+        val registosEliminados = TabelaBrands(db).elimina("${BaseColumns._ID}=?",
+            arrayOf(brand.id.toString())
+        )
+
+        assertEquals(3,registosEliminados)
+
+
+    }
+
+    @Test
+    fun consegueDeletarInstrumento(){
+
+        val db = getWritableDatabase()
+
+        val brand = Brand("Yamaha", "Japão", 1985)
+        insereBrand(db,brand)
+
+        val instrumento = Instrumento("Piano","Cordas","...",brand.id)
+        insereInstrumentos(db, instrumento)
+
+
+        val registosEliminados = TabelaInstrumentos(db).elimina("${BaseColumns._ID}=?",
+            arrayOf(instrumento.id.toString())
+        )
+
+        assertEquals(3,registosEliminados)
+    }
+
+
 }
