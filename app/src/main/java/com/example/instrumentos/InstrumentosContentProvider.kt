@@ -49,10 +49,12 @@ class InstrumentosContentProvider : ContentProvider() {
         private const val AUTORIDADE ="com.example.instrumentos"
         const val INSTRUMENTOS = "instrumentos"
         const val BRANDS="brands"
+        const val URI_INSTRUMENTOS=200
+        const val URI_BRANDS=100
 
         fun uriMatcher()=UriMatcher(UriMatcher.NO_MATCH).apply {
-            addURI(AUTORIDADE, BRANDS,100)
-            addURI(AUTORIDADE, INSTRUMENTOS,200)
+            addURI(AUTORIDADE, BRANDS, URI_BRANDS)
+            addURI(AUTORIDADE, INSTRUMENTOS, URI_INSTRUMENTOS)
         }
     }
 
