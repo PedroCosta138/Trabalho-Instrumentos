@@ -6,8 +6,12 @@ import android.database.Cursor
 import android.net.Uri
 
 class InstrumentosContentProvider : ContentProvider() {
+
+    private var bdOpenHelper : BdInstrumentosOpenHelper?=null
+
     override fun onCreate(): Boolean {
-        TODO("Not yet implemented")
+        bdOpenHelper=BdInstrumentosOpenHelper(context)
+        
     }
 
     override fun query(
