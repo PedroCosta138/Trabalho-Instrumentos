@@ -200,7 +200,7 @@ class BDInstrumentedTest {
             arrayOf(brand.id.toString())
         )
 
-        assertEquals(3,registosEliminados)
+        assertEquals(1,registosEliminados)
 
 
     }
@@ -221,7 +221,7 @@ class BDInstrumentedTest {
             arrayOf(instrumento.id.toString())
         )
 
-        assertEquals(3,registosEliminados)
+        assertEquals(1,registosEliminados)
     }
 
 
