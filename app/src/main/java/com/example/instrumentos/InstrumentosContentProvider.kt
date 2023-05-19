@@ -2,6 +2,7 @@ package com.example.instrumentos
 
 import android.content.ContentProvider
 import android.content.ContentValues
+import android.content.UriMatcher
 import android.database.Cursor
 import android.net.Uri
 
@@ -10,8 +11,9 @@ class InstrumentosContentProvider : ContentProvider() {
     private var bdOpenHelper : BdInstrumentosOpenHelper?=null
 
     override fun onCreate(): Boolean {
-        bdOpenHelper=BdInstrumentosOpenHelper(context)
-        
+        bdOpenHelper= BdInstrumentosOpenHelper(context)
+
+        return true
     }
 
     override fun query(
@@ -23,6 +25,8 @@ class InstrumentosContentProvider : ContentProvider() {
     ): Cursor? {
         TODO("Not yet implemented")
     }
+
+
 
     override fun getType(p0: Uri): String? {
         TODO("Not yet implemented")
@@ -38,6 +42,18 @@ class InstrumentosContentProvider : ContentProvider() {
 
     override fun update(p0: Uri, p1: ContentValues?, p2: String?, p3: Array<out String>?): Int {
         TODO("Not yet implemented")
+    }
+
+    companion object{
+
+        private const val AUTORIDADE ="com.example.instrumentos"
+        const val INSTRUMENTOS = "instrumentos"
+        const val BRANDS="brands"
+
+        fun uriMatcher()=UriMatcher(UriMatcher.NO_MATCH).apply {
+            addURI(AUTORIDADE, BRANDS,100)
+            addURI(AUTORIDADE, INSTRUMENTOS,200)
+        }
     }
 
 
