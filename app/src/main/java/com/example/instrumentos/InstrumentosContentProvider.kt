@@ -64,7 +64,7 @@ class InstrumentosContentProvider : ContentProvider() {
             URI_INSTRUMENTO_ID -> "vdn.android.cursor.item/$INSTRUMENTOS"
             URI_BRAND_ID -> "vdn.android.cursor.item/$BRANDS"
             else -> null
-            
+
         }
 
     }
