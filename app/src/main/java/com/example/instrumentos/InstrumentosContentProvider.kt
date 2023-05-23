@@ -60,7 +60,7 @@ class InstrumentosContentProvider : ContentProvider() {
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
             val db = bdOpenHelper!!.readableDatabase
-        
+
             val endereco = uriMatcher().match(uri)
 
             val tabela = when (endereco){
@@ -82,8 +82,28 @@ class InstrumentosContentProvider : ContentProvider() {
         TODO("Not yet implemented")
     }
 
-    override fun update(p0: Uri, p1: ContentValues?, p2: String?, p3: Array<out String>?): Int {
-        TODO("Not yet implemented")
+    override fun update(
+        uri: Uri,
+        values: ContentValues?,
+        selection: String?,
+        selectionArgs: Array<out String>?):
+            Int {
+
+        val db = bdOpenHelper!!.readableDatabase
+
+        val endereco = uriMatcher().match(uri)
+
+        val tabela = when (endereco){
+            URI_BRAND_ID -> TabelaBrands(db)
+            URI_INSTRUMENTO_ID -> TabelaInstrumentos(db)
+            else -> return 0
+
+        }
+
+        val id = uri.lastPathSegment!!
+
+         return tabela.altera(values!!,"${BaseColumns._ID}=?", arrayOf(id))
+
     }
 
     companion object{
