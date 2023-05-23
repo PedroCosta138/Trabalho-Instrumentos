@@ -59,7 +59,7 @@ class InstrumentosContentProvider : ContentProvider() {
     }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
-            val db = bdOpenHelper!!.readableDatabase
+            val db = bdOpenHelper!!.writableDatabase
 
             val endereco = uriMatcher().match(uri)
 
@@ -78,9 +78,25 @@ class InstrumentosContentProvider : ContentProvider() {
         return Uri.withAppendedPath(uri,id.toString())
     }
 
-    override fun delete(p0: Uri, p1: String?, p2: Array<out String>?): Int {
-        TODO("Not yet implemented")
+    override fun delete(uri: Uri, selection: String?, selectionArgs: Array<out String>?): Int {
+
+
+        val db = bdOpenHelper!!.writableDatabase
+
+        val endereco = uriMatcher().match(uri)
+
+        val tabela = when (endereco) {
+            URI_BRAND_ID -> TabelaBrands(db)
+            URI_INSTRUMENTO_ID -> TabelaInstrumentos(db)
+            else -> return 0
+
+        }
+
+        val id = uri.lastPathSegment!!
+
+        return tabela.elimina( "${BaseColumns._ID}=?", arrayOf(id))
     }
+
 
     override fun update(
         uri: Uri,
@@ -89,7 +105,7 @@ class InstrumentosContentProvider : ContentProvider() {
         selectionArgs: Array<out String>?):
             Int {
 
-        val db = bdOpenHelper!!.readableDatabase
+        val db = bdOpenHelper!!.writableDatabase
 
         val endereco = uriMatcher().match(uri)
 
