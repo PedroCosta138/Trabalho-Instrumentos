@@ -54,8 +54,19 @@ class InstrumentosContentProvider : ContentProvider() {
     }
 
 
-    override fun getType(p0: Uri): String? {
-        TODO("Not yet implemented")
+    override fun getType(uri: Uri): String? {
+        val endereco = uriMatcher().match(uri)
+
+        return when(endereco){
+
+            URI_INSTRUMENTOS-> "vdn.android.cursor.dir/$INSTRUMENTOS"
+            URI_BRANDS -> "vdn.android.cursor.dir/$BRANDS"
+            URI_INSTRUMENTO_ID -> "vdn.android.cursor.item/$INSTRUMENTOS"
+            URI_BRAND_ID -> "vdn.android.cursor.item/$BRANDS"
+            else -> null
+            
+        }
+
     }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
