@@ -7,18 +7,6 @@
     android:orientation="vertical"
     tools:context=".MenuPrincipalFragmento">
 
-    <TextView
-        android:id="@+id/textViewMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/menu"
-        app:fontFamily="sans-serif-black"
-        app:layout_constraintBottom_toTopOf="@+id/button_Instrumentos"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:textAllCaps="true" />
-
     <Button
         android:id="@+id/button_Instrumentos"
         android:layout_width="match_parent"
